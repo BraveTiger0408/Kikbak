@@ -1,0 +1,48 @@
+# Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+twbs:bootstrap
+mrt:moment
+http
+alethes:lodash
+iron:router
+mrt:gsap
+mquandalle:jade
+accounts-ui
+accounts-google
+service-configuration
+less
+lukemadera:social-share
+anti:modals
+konecty:autolinker
+mousetrap:mousetrap
+hpx7:youtube-iframe-player
+mrt:jquery-mousewheel
+jquery
+reywood:iron-router-ga
+meteorhacks:subs-manager
+msavin:jetsetter
+panphora:environment-template-helpers
+matdutour:popup-confirm
+chuangbo:cookie
+grigio:babel
+ficshelf:media-query
+natestrauser:font-awesome
+standard-minifiers
+meteor-base
+mobile-experience
+mongo
+blaze-html-templates
+session
+tracker
+logging
+reload
+random
+ejson
+spacebars
+check
+mrt:jquery-ui
+chriswessels:hammer

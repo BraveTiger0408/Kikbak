@@ -1,0 +1,4 @@
+web: node server.js
+parseFeeds: node workers/parseFeeds.js
+shareCounts: node workers/getShareCounts.js
+updateStats: node workers/updateStats.js

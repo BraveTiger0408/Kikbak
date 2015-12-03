@@ -1,0 +1,73 @@
+nav.navbar.navbar-inverse
+  .container-fluid.navBack
+    .navbar-header
+      button.navbar-toggle.collapsed(type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1")
+        span.sr-only Toggle navigation
+        span.icon-bar 
+        span.icon-bar 
+        span.icon-bar 
+
+      +if and isVideo notPlayerPushedTop
+        .navbar-btn.collapsed.mobile-exit
+          i.fa.fa-times-circle-o
+
+      a.navbar-brand(href="/")
+        .logo
+          p.k K
+          img.logo(src="/images/logo.png")
+          p.b B
+          
+      +if and isVideo notPlayerPushedTop
+        .navbar-btn.collapsed.mobile-heart
+          i.fa#headerLike.faa-pulse.animated-hover(class="{{#if isLiked}}fa-heart{{else}}fa-heart-o{{/if}}")
+
+      +if screensize_medium
+        ul.nav.small-nav
+          li
+            span(href="") #{currentVideo.title}
+
+    .collapse.navbar-collapse#bs-example-navbar-collapse-1
+      +if isVideo
+        ul.nav.navbar-nav.navbar-left
+          li.prevButton
+            a(href="" onclick="return false")
+              i.fa.fa-fast-backward
+          li.playButton
+            a(href="" onclick="return false")
+              i.fa(class="#{stateImage}")
+          li.nextButton
+            a(href="" onclick="return false")
+              i.fa.fa-fast-forward
+          li
+            a(href="" onclick="return false")
+              i.fa#headerLike.faa-pulse.animated-hover(class="{{#if isLiked}}fa-heart{{else}}fa-heart-o{{/if}}")
+      
+        if or playerMinimized playerPushedTop
+          ul.nav.navbar-nav.navbar-center
+            li
+              a(href="") #{currentVideo.title}
+        else if or screensize_small screensize_medium
+          ul.nav.navbar-nav.navbar-center
+            li
+              a(href="") #{currentVideo.title}
+              
+      ul.nav.navbar-nav.navbar-right
+        li
+          +loginButtons
+        li.dropdown
+          a.dropdown-toggle(href="#" data-toggle="dropdown" role="button" aria-expanded="false") 
+            | #{selectedGenre}
+            span.caret
+          ul.dropdown-menu(role="menu")
+            each genres
+              li
+                a(href="#" class="#{this.className}" onclick="return false;") #{this.type}
+            li.divider(role="presentation")
+            li
+              a(href="#" class="likedVideos" onclick="return false;") Likes
+            li
+              a(href="#" class="aboutDrop" onclick="return false;") About
+        li
+          a.help(href="#" onclick="return false;")
+            i.fa.fa-question-circle
+              

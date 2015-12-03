@@ -1,0 +1,159 @@
+head
+	meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
+	meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1")
+	meta(name="apple-mobile-web-app-capable" content="yes")
+	meta(name="apple-mobile-web-app-status-bar-style" content="black-translucent")
+	meta(name="mobile-web-app-capable" content="yes")
+
+	title kikbak.tv
+	link(href='http://fonts.googleapis.com/css?family=Lato:400,900' rel='stylesheet' type='text/css')
+	link(href='https://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css')
+	link(rel='icon' href='/images/favicon.ico')
+
+body
+
+template(name="layout")
+	div(class="#{platformClasses}")
+		+HammerTouchArea gestureMap=templateGestures
+			+player
+		+header
+		div(style="height:100%")
+			+yield
+
+template(name="turnScreenModal")
+	.anti-modal-box
+		.anti-modal-header 
+			.anti-modal-title Turn your Phone!
+			.anti-modal-closer &times;
+		.anti-modal-body 
+			p Kikbak.tv is all about music videos and is best used in landscape mode. Try turning your phone or widening your browser window.
+
+template(name="simpleModal")
+	.anti-modal-box
+		.anti-modal-header 
+			.anti-modal-title #{loggedIn}
+			.anti-modal-closer &times;
+		.anti-modal-body 
+			p Log in with your google account to like videos and view all your youtube likes.
+			.text-center
+				+loginButtons
+
+template(name="helpModal")
+	.about.anti-modal-box
+		.anti-modal-header
+			.anti-modal-title
+				h2 What is kikbak.tv?
+			.anti-modal-closer &times;
+		.anti-modal-body 
+			p 
+				| kikbak.tv combs the internet for the newest coolest music videos everyday. Find out more
+				a.about(href='/about') here
+			h3 Shortcuts
+			p Many of the actions you can do in the app can also be done at the press of a key!
+			+each shortcut
+				.keyRow
+					.left
+						span.key #{this.key}
+					.right
+						p.keyExp #{this.exp}
+			
+template(name='player')
+	+if needOverlay
+		.blackOverlay(class="overlayFront")
+	.appBody 
+	+if pushedTop
+		.downArrow(id="downArrow")
+			i.fa.fa-chevron-down
+
+	.playerContainer(id="playerContainer")
+		.playerSideBar(id="playerSideBar")
+			.sideBarTop
+				.sideTitle
+					p #{currentVideo.title}
+				.sideDate
+					p #{formedDate}
+				.bigRank
+					p(class="rankDesc") rank
+					p(class="number") #{currentVideo.rank}
+			.sideBarRest
+				+lmSocialShare opts=sharedata
+				.stats
+					.sideLikes
+						.fa.fa-facebook
+						p #{fbCounter}
+					.sideDislikes
+						.fa.fa-twitter
+						p #{twCounter}
+				.sideDescription 
+					p {{#autolink}}#{currentVideo.description}{{/autolink}}			
+		.playerNavBar(id="playerNavBar")
+			.togglePlayer(id="togglePlayer").shrink
+				i.fa.fa-times-circle-o
+				p close
+			+if isDevEnvironment
+				.flagContainer
+					#flagStyle.btn-group(role="group" aria-label="...")
+						.btn.btn-default.flag-live(type="button") Live
+						.btn.btn-default.flag-livehh(type="button") LiveHH
+						.btn.btn-default.flag-interview(type="button") Interv
+						.btn.btn-default.flag-still(type="button") Still
+					.flagVideo(id="flagVideo")
+						i.fa.fa-flag
+						p flag
+
+			.minimizePlayer(id="minimizePlayer").shrink
+				p minimize
+				i.fa.fa-compress
+		.playerNavBarMinimized(id="playerNavBarMinimized")
+			.closePlayer(id="closePlayer")
+				p close
+				i.fa.fa-times.mini-exit.grow
+			.expandPlayer(id="expandPlayer")
+				i.fa.fa-expand.fa-flip-horizontal.mini-expand.grow-flipped
+				p expand
+
+		.player(class="{{#if or screensize_small screensize_medium}}smallPlayer{{/if}}")
+			#player
+			+if or screensize_small screensize_medium
+				.mobile-info.col-xs-12
+					.title.row
+						p.song #{currentVideo.title}
+						.date
+								p #{formedDate}
+					.row.details
+						.col-xs-3.left
+							.bigRank
+								p(class="rankDesc") rank
+								p(class="number") #{currentVideo.rank}
+						.col-xs-9
+							.description 
+								p {{#autolink}}#{currentVideo.description}{{/autolink}}	
+
+
+template(name='gridThumbs')
+	.scroll-container
+		.flex-container
+			+each videos
+				.flex-items-default.single(id="#{this._id}" class="{{#if featured}}featured{{/if}}" style="background-repeat: no-repeat; background-position: center center; {{#if featured}}background-image:url('#{this.thumbHQ}'); background-size: contain; {{else}}background-image:url('#{this.thumbSmall}'); background-size: cover; {{/if}}") 
+					.overlay(class="{{#if isSelected}}selected{{/if}}")
+						.rank
+							p #{this.rank}
+						.icon-links
+							a.heart(href="#" class="{{#if isLiked}}liked{{/if}}")
+								.fa.faa-pulse.animated-hover(class="{{#if isLiked}}fa-heart{{else}}fa-heart-o{{/if}}")
+							a(href="#")
+								.fa.fa-facebook.faa-shake.animated-hover
+							a(href="#")
+								.fa.fa-twitter.faa-shake.animated-hover
+					.gradient
+					.dotbg
+					.descriptionText(style="{{#if alwaysShowTitles}}top:40px{{else}}{{#if or screensize_small screensize_medium}}top:20px{{/if}}{{/if}}")
+						p #{this.title}
+					.play-icon
+						.fa.fa-play
+
+template(name="loading")
+	.loader
+		.dot
+		.dot
+		.dot

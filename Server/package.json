@@ -1,0 +1,32 @@
+{
+  "name": "mongo-server",
+  "version": "0.0.1",
+  "description": "A top 100 of the newest music videos.",
+  "author": "Andrew",
+  "main": "server.js",
+  "engines": {
+    "node": "0.12.x"
+  },
+  "dependencies": {
+    "async": "^1.4.2",
+    "body-parser": "^1.14.1",
+    "cheerio": "latest",
+    "express": "3.3.4",
+    "feedparser": "^1.1.1",
+    "get-youtube-id": "^0.1.3",
+    "gm": "^1.21.1",
+    "gulp": "^3.8.11",
+    "gulp-develop-server": "^0.4.2",
+    "gulp-watch": "^4.2.4",
+    "jade": "^1.11.0",
+    "lodash": "^3.8.0",
+    "mongodb": "^2.0.45",
+    "mongojs": "*",
+    "node-schedule": "^0.2.7",
+    "parse-rss": "*",
+    "request": "^2.55.0",
+    "request-enhanced": "^0.1.1",
+    "youtube-node": "^1.2.0",
+    "youtube-thumbnail": "^1.2.0"
+  }
+}

@@ -1,0 +1,42 @@
+html
+	body
+		div
+			h1 #{bucket}
+			h2(style="margin-left:3%") keywords
+			.keywords(style="width: 100%; height:40vh; position:relative;")
+				select.oldkeywords(name="sometext" multiple="multiple" style="width: 40%; margin-left:3%; height:100%")
+					each keyword in keywords
+						option "#{keyword.text}" count: #{keyword.count}
+				button.moveKeywords(style="margin-left:5%") Move >>
+				select.newkeywords(name="sometext" multiple="multiple" style="width: 40%; margin-left:5%; height:100%")
+					each aprov in approvedKeywords
+						option #{aprov}
+				button.deleteApprovedKeywords(style="position: absolute;right: 10%;bottom: -25px;") << Put Back Approved Keyword
+
+			h2(style="margin-left:3%") taxonomy
+			.taxonomy(style="width: 100%; height:40vh; position:relative;")
+				select.oldTaxonomy(name="sometext" multiple="multiple" style="width: 40%; margin-left:3%; height:100%")
+					each tax in taxonomy
+						option "#{tax.text}" count: #{tax.count}
+
+				button.moveTaxonomy(style="margin-left:5%") Move >>
+				select.newTaxonomy(name="sometext" multiple="multiple" style="width: 40%; margin-left:5%; height:100%")
+					each aprov in solidTaxonomy
+						option #{aprov}
+				button.deleteSolidTaxonomy(style="position: absolute;right: 10%;bottom: -25px;") << Put Back Approved Taxonomy
+
+			h2(style="margin-left:3%") entities
+			.entities(style="width: 100%; height:40vh; position:relative; margin-bottom: 50px;")
+				select.oldEntities(name="sometext" multiple="multiple" style="width: 40%; margin-left:3%; height:100%")
+					each ent in entities
+						option "#{ent.text}" count: #{ent.count}
+
+				button.moveEntities(style="margin-left:5%") Move >>
+				select.newEntities(name="sometext" multiple="multiple" style="width: 40%; margin-left:5%; height:100%")
+					each aprov in solidEntities
+						option #{aprov}
+				button.deleteSolidEntities(style="position: absolute;right: 10%;bottom: -25px;") << Put Back Approved Entity
+
+	
+		script(src='/javascripts/jquery.js', type="text/javascript")
+		script(src='/javascripts/bucket.js', type="text/javascript")

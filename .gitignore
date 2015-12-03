@@ -1,0 +1,5 @@
+Server/node_modules/*
+Server/node_modules/feedparser/
+wonderVidClient/.meteor/*
+.build
+wonderVidClient/kikbak-android.cer
